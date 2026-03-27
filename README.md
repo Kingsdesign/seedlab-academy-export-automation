@@ -76,6 +76,67 @@ python3 combine_csvs.py -o my-combined-file.csv
 python3 combine_csvs.py file1.csv file2.csv file3.csv -o combined.csv
 ```
 
+## Download materials from Attachment URL + Image URL
+
+Use `download_materials.py` to download all files referenced in:
+
+- `Attachment URL`
+- `Image URL`
+
+from `combined-learndash-export.csv` (or another CSV you provide).
+
+### What this script does
+
+- Reads CSV using UTF-8 BOM-safe parsing
+- Extracts URLs from both columns above
+- Handles **multiple files in a single row/cell** (supports `|`-separated URLs, and line breaks)
+- Creates a local `materials` folder automatically
+- Downloads files into that folder
+- Skips invalid/blank URLs safely
+- Avoids filename collisions automatically (e.g. `file.pdf`, `file_1.pdf`, ...)
+- Prints a final summary (found, downloaded, skipped, failed, duplicates)
+
+### How to run
+
+Default run:
+
+```bash
+python3 download_materials.py
+```
+
+Custom CSV / output folder:
+
+```bash
+python3 download_materials.py --csv combined-learndash-export.csv --output-dir materials
+```
+
+Overwrite existing files:
+
+```bash
+python3 download_materials.py --overwrite
+```
+
+Set timeout:
+
+```bash
+python3 download_materials.py --timeout 60
+```
+
+### Note (SSL certificate errors)
+
+`download_materials.py` now attempts to use the `certifi` CA bundle automatically (if installed), which fixes most macOS certificate trust issues.
+
+If needed, install certifi:
+
+```bash
+python3 -m pip install --upgrade certifi
+```
+
+Then run again:
+
+```bash
+python3 download_materials.py
+
 ## Notes for future use
 
 - Default CSV inputs are defined at the top of `combine_csvs.py` as:
@@ -89,3 +150,4 @@ python3 combine_csvs.py file1.csv file2.csv file3.csv -o combined.csv
 - If any input file is missing, the script will show an error listing missing files.
 - If a lesson/topic permalink does not include `/courses/<course-slug>/`, then `Parent Course Category` will remain blank.
 - If no Vimeo URL is found in `Content`, `Vimeo Video` will remain blank.
+```
