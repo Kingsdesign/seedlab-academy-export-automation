@@ -1,12 +1,33 @@
+## Process to make csv file ready for ALLM
+
+- Export All Courses, lessons and topics from live site
+  - Use the existing export template from All Export > Manage Exports
+  - If doing a new export make sure to include the following on the export
+    - ID
+    - Post Type
+    - Title
+    - Content
+    - Course Categories
+    - Permalink
+    - Attachment URL
+    - Attachment Filename
+    - Image URL
+    - Image Filename
+- Add your exported file to the folder
+- Follow the steps below
+
 # Learndash CSV Combine Script
 
 This folder includes a Python script (`combine_csvs.py`) to combine the 3 Learndash export CSV files into one file.
 
-## Files
+## CSV Files expected (file name as exported)
 
 - `Courses-Export-2026-March-27-0057.csv`
 - `Lessons-Export-2026-March-27-0100.csv`
 - `Topics-Export-2026-March-27-0101.csv`
+
+## Combining Python Script
+
 - `combine_csvs.py`
 
 ## What the script does
@@ -32,7 +53,8 @@ This folder includes a Python script (`combine_csvs.py`) to combine the 3 Learnd
 
 ## How to run
 
-Open terminal in this folder and run:
+- Make sure to update the file names on 'combine_csvs.py' file.
+- Open terminal in this folder and run:
 
 ```bash
 python3 combine_csvs.py
