@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import csv
 import re
+from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -25,6 +26,16 @@ DEFAULT_INPUT_FILES = [
     Path(DEFAULT_LESSONS_CSV),
     Path(DEFAULT_TOPICS_CSV),
 ]
+
+
+def default_output_filename() -> Path:
+    """Return output filename in required format.
+
+    Format:
+    seedlab-lessons-topic-video-map-export-<ddmmyy-hour-seconds>.csv
+    """
+    export_timestamp = datetime.now().strftime("%d%m%y-%H-%S")
+    return Path(f"seedlab-lessons-topic-video-map-export-{export_timestamp}.csv")
 
 
 def extract_course_slug(permalink: str) -> str | None:
@@ -154,8 +165,11 @@ def parse_args() -> argparse.Namespace:
         "-o",
         "--output",
         type=Path,
-        default=Path("combined-learndash-export.csv"),
-        help="Output CSV filename (default: combined-learndash-export.csv)",
+        default=default_output_filename(),
+        help=(
+            "Output CSV filename "
+            "(default: seedlab-lessons-topic-video-map-export-<ddmmyy-hour-seconds>.csv)"
+        ),
     )
     return parser.parse_args()
 
