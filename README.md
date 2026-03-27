@@ -62,7 +62,7 @@ python3 combine_csvs.py
 
 This creates:
 
-- `combined-learndash-export.csv`
+- `seedlab-lessons-topic-video-map-export-date-time.csv` eg: seedlab-lessons-topic-video-map-export-270326-14-14.csv
 
 ## Optional: custom output file name
 
